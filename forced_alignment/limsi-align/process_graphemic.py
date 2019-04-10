@@ -1,0 +1,184 @@
+import sys, codecs
+
+train_set = 0 
+dev_set = 1
+
+class Word:
+    def __init__(self, string):
+        self.string = self._normalize(string)
+        self.phones = []
+
+    def add_phone(self, phone):
+        self.phones.append(phone)
+    
+    def _normalize(self, string):
+        return string.replace("</s>","SIL").replace("[silence]", "SIL").replace("<UNK>", "SIL")
+
+    def merge_phones(self):
+        start = self.phones[0].start
+        end = self.phones[-1].end
+        symbol = self.phones[0].symbol
+        new_phone = Phone("", [start, end, symbol])
+        self.phones = [new_phone]
+
+    def to_string(self):
+        start = self.phones[0].start
+        end = self.phones[-1].end
+        return "%.4f %.4f %s" % (start, end, self.string)
+
+class Phone:
+    def __init__(self, string, values=None):
+        if not values:
+            self.symbol, self.start, self.end = self.process_string(string)
+            if self.start == 0.01: #beginning of the sentence
+                self.start = 0.0
+        else:
+            self.start = values[0]
+            self.end = values[1]
+            self.symbol = values[2]
+        #self.end = -1
+    
+    def set_end(self, value):
+        self.end = value
+
+    def process_string(self, string):
+        line = string.split(" ")[1:]
+        symbol = line[0].split(":")[0]
+        if symbol == '1' or symbol == '70':
+            symbol = "SIL"
+        else:
+            symbol = 'phn' + symbol
+        return symbol, float(line[2]) * 0.01, float(sum([int(element) for element in line[2:]])) * 0.01
+    
+    def to_string(self):
+        return "%.4f %.4f %s" % (self.start, self.end, self.symbol)
+
+def match(files_id, index, f_id):
+    for i in range(len(files_id)):
+        if f_id == files_id[i][index]:
+            return True, files_id[i][-1]
+    return False, None
+
+def get_phones(string, num_phones, lines, index):
+    word_element = Word(string)
+    for _ in range(num_phones):
+        p = Phone(lines[index])
+        word_element.add_phone(p)
+        index += 1
+    return word_element, index
+
+def process_lines(lines, files_id, index):
+    Corpus = dict()
+    i = 0
+    valid = False
+    while(i < len(lines)):
+        line = lines[i]
+        if "sid=" in line: #id case
+            f_id = line.replace(".001","").split("=")[-1]
+            valid, f_id = match(files_id, index, f_id)
+            if valid:
+                Corpus[f_id] = []
+            i += 1
+        elif "@ word=" in line and valid: #flag beginning of a word
+            fragments = line.split("word=")[-1].split(" ")
+            string = fragments[0]
+            i += 1 #put the index on the first phone
+            num_phones = int(fragments[1].replace("nbs=",""))
+            if len(string.split("_")) > 1:
+                strings = string.split("_")
+                #print(strings, num_phones)
+                sum_strings = sum([len(string.replace("\'","")) for string in strings])
+                if sum_strings == num_phones:
+                    for string in strings: #everything is right, it is just concatenated
+                        word_element, i = get_phones(string, len(string.replace("\'","")), lines, i)
+                        Corpus[f_id].append(word_element)
+
+                elif len(strings) <= num_phones: #problem in the number of phones
+                    if len(strings) == 2:
+                        first = strings[0]
+                        size = len(first.replace("\'",""))
+                        if len(strings) < num_phones:
+                            word_element, i = get_phones(first, size, lines, i) 
+                            remain = num_phones - size
+                        else:
+                            word_element, i = get_phones(first, 1, lines, i)
+                            #print(word_element.to_string(), len(word_element.phones))
+                            remain = num_phones - 1
+                        Corpus[f_id].append(word_element)
+                        word_element, i = get_phones(strings[1], remain, lines, i)
+                        #print(word_element.to_string(), len(word_element.phones))
+                        Corpus[f_id].append(word_element)
+                    else:
+                        for string in strings[:-1]: #give one phone to every word and accumulates on the last one
+                            word_element, i = get_phones(string, 1, lines, i)
+                            Corpus[f_id].append(word_element)
+
+                        remain = num_phones - len(strings[:-1])
+                        assert remain > 0, "Invalid number of phones"
+                        word_element, i = get_phones(strings[-1], remain, lines, i)
+                        Corpus[f_id].append(word_element)
+
+
+                else:
+                    raise Exception("Exception processing line: Slicing problem!")
+                    print(f_id, string)
+                    print(strings)
+                    exit(1)
+            else:
+                word_element, i = get_phones(string, num_phones, lines, i)
+                Corpus[f_id].append(word_element)
+
+        else: #trash
+            i += 1
+    return Corpus
+
+def save_ids(dictionary, f_path):
+    with open(f_path,"w") as output_file:
+        for key in dictionary.keys():
+            output_file.write(key + "\n")
+
+def write_wrd(dct1, dct2):
+    for dct in [dct1, dct2]:
+        for key in dct.keys():
+            with open("wrd/" + key + ".wrd", "w") as output_file:
+                for word_element in dct[key]:
+                    output_file.write(word_element.to_string() + "\n")
+
+def write_phn(dct1, dct2):
+    for dct in [dct1, dct2]:
+        for key in dct.keys():
+            with open("phn/" + key + ".phn", "w") as output_file:
+                for word_element in dct[key]:
+                    for phone in word_element.phones:
+                        output_file.write(phone.to_string() + "\n")
+
+def merge_silence(dictionary):
+    for key in dictionary.keys():
+        for word_element in dictionary[key]:
+            if word_element.string == "SIL" and len(word_element.phones) > 1:
+                word_element.merge_phones()
+    return dictionary
+
+def process():
+    train_lines = [line.strip() for line in open(sys.argv[1],"r", errors="ignore")]
+    #dev_lines = [line.strip() for line in open(sys.argv[2],"r", errors="ignore")]
+    files_id =[("_".join(line.strip().split("_")[1:]), line.strip()) for line in open(sys.argv[2],"r")]
+
+    train_dict = process_lines(train_lines, files_id, train_set)
+    #dev_dict = process_lines(dev_lines, files_id, dev_set)
+
+    #print(len(train_dict), len(dev_dict))
+
+    save_ids(train_dict, "train.ids")
+    #save_ids(dev_dict, "dev.ids")
+
+    #merge silence
+
+    train_dict = merge_silence(train_dict)
+
+    write_wrd(train_dict, dict())#, dev_dict)
+    write_phn(train_dict, dict())#, dev_dict)
+
+
+if __name__ == "__main__":
+    process()

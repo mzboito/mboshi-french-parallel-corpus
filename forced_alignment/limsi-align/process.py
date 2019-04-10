@@ -14,16 +14,28 @@ class Word:
     def _normalize(self, string):
         return string.replace("</s>","SIL").replace("[silence]", "SIL").replace("<UNK>", "SIL")
 
+    def merge_phones(self):
+        start = self.phones[0].start
+        end = self.phones[-1].end
+        symbol = self.phones[0].symbol
+        new_phone = Phone("", [start, end, symbol])
+        self.phones = [new_phone]
+
     def to_string(self):
         start = self.phones[0].start
         end = self.phones[-1].end
         return "%.4f %.4f %s" % (start, end, self.string)
 
 class Phone:
-    def __init__(self, string):
-        self.symbol, self.start, self.end = self.process_string(string)
-        if self.start == 1: #beginning of the sentence
-            self.start = 0.0
+    def __init__(self, string, values=None):
+        if not values:
+            self.symbol, self.start, self.end = self.process_string(string)
+            if self.start == 0.01: #beginning of the sentence
+                self.start = 0.0
+        else:
+            self.start = values[0]
+            self.end = values[1]
+            self.symbol = values[2]
         #self.end = -1
     
     def set_end(self, value):
@@ -95,6 +107,13 @@ def write_phn(dct1, dct2):
                     for phone in word_element.phones:
                         output_file.write(phone.to_string() + "\n")
 
+def merge_silence(dictionary):
+    for key in dictionary.keys():
+        for word_element in dictionary[key]:
+            if word_element.string == "SIL" and len(word_element.phones) > 1:
+                word_element.merge_phones()
+    return dictionary
+
 def process():
     train_lines = [line.strip() for line in open(sys.argv[1],"r", errors="ignore")]
     dev_lines = [line.strip() for line in open(sys.argv[2],"r", errors="ignore")]
@@ -109,6 +128,8 @@ def process():
     save_ids(dev_dict, "dev.ids")
 
     #merge silence
+
+    train_dict = merge_silence(train_dict)
 
     write_wrd(train_dict, dict())#, dev_dict)
     write_phn(train_dict, dict())#, dev_dict)
