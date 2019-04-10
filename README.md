@@ -3,9 +3,10 @@ This is a fork from the original repository, available at besacier/mboshi-french
 
 ## The content of this repository is the following:
 * Forced alignment, wav, translation and transcription files (same from the original repository)
-* 5K *new* Zero Resource Challenge reference
 * Pseudo phones (with and without gold silence information) extracted using zrc recipe from beer-asr/asr
 * True phones individual files (extracted form the limsi-align)
+
+=> New ZRC reference is available [here](https://github.com/mzboito/ZRC_corpora).
 
 ## Citing:
 Please use the following bibtex reference to cite our corpus and LREC2018 paper, available at http://arxiv.org/abs/1710.03501
