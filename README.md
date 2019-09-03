@@ -1,10 +1,12 @@
-# Mboshi-French parallel corpus
-This is a fork from the original repository, available at besacier/mboshi-french-parallel-corpus
+# MMboshi: Multilingual Mboshi Parallel Corpus
+This is an extension of the Mboshi-French parallel corpus available at besacier/mboshi-french-parallel-corpus
 
 ## The content of this repository is the following:
 * Forced alignment, wav, translation and transcription files (same from the original repository)
 * Pseudo phones (with and without gold silence information) extracted using zrc recipe from beer-asr/asr
 * True phones individual files (extracted form the limsi-align)
+
+## SOON: translations in other languages
 
 => New ZRC reference is available [here](https://github.com/mzboito/ZRC_corpora).
 
