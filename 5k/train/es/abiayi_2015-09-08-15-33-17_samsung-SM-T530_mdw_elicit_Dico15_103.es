@@ -1,0 +1,1 @@
+tuve una fuerte emoción

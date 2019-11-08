@@ -1,0 +1,1 @@
+la tórtola está atrapada

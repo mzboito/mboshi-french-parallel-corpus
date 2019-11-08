@@ -1,0 +1,1 @@
+confesó que había robado

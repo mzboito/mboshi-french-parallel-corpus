@@ -1,0 +1,1 @@
+esta puerta está bloqueada

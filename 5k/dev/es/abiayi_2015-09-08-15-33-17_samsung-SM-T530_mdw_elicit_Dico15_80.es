@@ -1,0 +1,1 @@
+habla en parábolas

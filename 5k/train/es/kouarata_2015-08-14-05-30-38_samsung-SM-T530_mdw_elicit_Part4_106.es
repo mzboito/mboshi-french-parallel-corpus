@@ -1,0 +1,1 @@
+es ciego de nacimiento

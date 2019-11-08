@@ -1,0 +1,1 @@
+actuó mal conmigo

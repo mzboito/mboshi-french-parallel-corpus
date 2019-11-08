@@ -1,0 +1,1 @@
+fue tratado con amabilidad

@@ -1,0 +1,1 @@
+ella empuña un cuchillo

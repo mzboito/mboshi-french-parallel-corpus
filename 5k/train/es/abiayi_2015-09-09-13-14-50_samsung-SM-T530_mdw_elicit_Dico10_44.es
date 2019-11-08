@@ -1,0 +1,1 @@
+okra suaviza el koko

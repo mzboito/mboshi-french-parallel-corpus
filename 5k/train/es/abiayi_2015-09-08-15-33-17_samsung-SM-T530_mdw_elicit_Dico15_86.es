@@ -1,0 +1,1 @@
+nuestros antepasados fueron esclavizados

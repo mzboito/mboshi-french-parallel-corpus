@@ -1,0 +1,1 @@
+se lastimó la barbilla

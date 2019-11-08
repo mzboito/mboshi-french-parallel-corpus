@@ -1,0 +1,1 @@
+tiene malos pensamientos

@@ -1,0 +1,1 @@
+está muerto de acuerdo

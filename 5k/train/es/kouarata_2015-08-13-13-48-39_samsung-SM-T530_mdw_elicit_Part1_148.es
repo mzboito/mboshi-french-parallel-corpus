@@ -1,0 +1,1 @@
+la carne está dañada

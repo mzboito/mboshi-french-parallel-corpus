@@ -1,0 +1,1 @@
+su hijo está herido

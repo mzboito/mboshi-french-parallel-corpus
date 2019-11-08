@@ -1,0 +1,1 @@
+su garganta está seca

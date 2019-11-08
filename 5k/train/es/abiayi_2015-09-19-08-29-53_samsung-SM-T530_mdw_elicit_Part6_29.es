@@ -1,0 +1,1 @@
+la carretera está bloqueada

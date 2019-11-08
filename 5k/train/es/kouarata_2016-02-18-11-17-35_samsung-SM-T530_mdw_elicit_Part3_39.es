@@ -1,0 +1,1 @@
+cortan todos los árboles

@@ -1,0 +1,1 @@
+tartamudea apenas le entiendo

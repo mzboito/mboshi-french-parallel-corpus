@@ -1,0 +1,1 @@
+onduma cometió adulterio

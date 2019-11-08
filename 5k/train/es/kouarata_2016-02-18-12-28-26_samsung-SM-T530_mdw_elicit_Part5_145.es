@@ -1,0 +1,1 @@
+estaba vestida de blanco

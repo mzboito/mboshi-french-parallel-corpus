@@ -1,0 +1,1 @@
+cuántos pollos has comprado

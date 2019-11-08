@@ -1,0 +1,1 @@
+se torció el omóplato

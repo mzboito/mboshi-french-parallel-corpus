@@ -1,0 +1,1 @@
+por cuánto los compraste

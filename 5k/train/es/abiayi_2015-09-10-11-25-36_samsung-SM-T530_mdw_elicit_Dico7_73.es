@@ -1,0 +1,1 @@
+fumar causa enfermedad pulmonar

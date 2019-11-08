@@ -1,0 +1,1 @@
+preparé pescado con verduras

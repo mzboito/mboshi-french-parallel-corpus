@@ -1,0 +1,1 @@
+ngala es soltera

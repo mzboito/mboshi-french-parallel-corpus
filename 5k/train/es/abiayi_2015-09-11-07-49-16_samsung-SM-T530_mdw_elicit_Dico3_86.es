@@ -1,0 +1,1 @@
+el brazo está roto

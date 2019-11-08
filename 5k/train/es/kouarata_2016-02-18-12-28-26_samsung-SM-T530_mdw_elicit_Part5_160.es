@@ -1,0 +1,1 @@
+la herida está abierta

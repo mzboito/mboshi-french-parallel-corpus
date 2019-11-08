@@ -1,0 +1,1 @@
+tiene el pelo rizado

@@ -1,0 +1,1 @@
+su marido es apuñalado

@@ -1,0 +1,1 @@
+alomba habló en parábolas

@@ -1,0 +1,1 @@
+aunque pequeño es fuerte

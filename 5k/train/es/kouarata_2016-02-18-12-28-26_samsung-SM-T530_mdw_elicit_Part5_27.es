@@ -1,0 +1,1 @@
+se volvió hacia atrás

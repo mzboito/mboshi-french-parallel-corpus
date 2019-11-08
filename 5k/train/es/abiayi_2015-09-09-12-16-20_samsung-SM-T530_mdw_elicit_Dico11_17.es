@@ -1,0 +1,1 @@
+mi bastón está cortado

@@ -1,0 +1,1 @@
+está planeando su viaje

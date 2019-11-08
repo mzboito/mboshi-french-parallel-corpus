@@ -1,0 +1,1 @@
+mis trampas están intactas

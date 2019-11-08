@@ -1,0 +1,1 @@
+apaga la lámpara

@@ -1,0 +1,1 @@
+tu madre lo insultó

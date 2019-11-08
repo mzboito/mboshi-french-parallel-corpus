@@ -1,0 +1,1 @@
+tu amistad terminará mal

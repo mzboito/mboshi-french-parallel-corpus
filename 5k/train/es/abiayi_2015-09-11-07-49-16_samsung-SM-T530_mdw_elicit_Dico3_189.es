@@ -1,0 +1,1 @@
+tiene mucho dinero

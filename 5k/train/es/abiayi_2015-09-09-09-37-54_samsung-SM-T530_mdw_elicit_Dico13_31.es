@@ -1,0 +1,1 @@
+su padre es mecánico

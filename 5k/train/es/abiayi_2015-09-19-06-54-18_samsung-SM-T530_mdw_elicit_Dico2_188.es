@@ -1,0 +1,1 @@
+el ratón está atrapado

@@ -1,0 +1,1 @@
+está tocando la batería

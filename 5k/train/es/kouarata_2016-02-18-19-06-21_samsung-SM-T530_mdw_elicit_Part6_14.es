@@ -1,0 +1,1 @@
+es tuerto de nacimiento

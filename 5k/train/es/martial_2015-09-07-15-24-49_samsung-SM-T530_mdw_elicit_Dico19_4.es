@@ -1,0 +1,1 @@
+esta parcela es mía

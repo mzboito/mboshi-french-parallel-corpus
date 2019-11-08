@@ -1,0 +1,1 @@
+su discapacidad es aparente

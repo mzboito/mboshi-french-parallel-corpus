@@ -1,0 +1,1 @@
+adoptó al niño huérfano

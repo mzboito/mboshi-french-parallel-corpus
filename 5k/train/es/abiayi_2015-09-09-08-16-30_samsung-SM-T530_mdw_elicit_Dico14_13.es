@@ -1,0 +1,1 @@
+la ropa está sucia

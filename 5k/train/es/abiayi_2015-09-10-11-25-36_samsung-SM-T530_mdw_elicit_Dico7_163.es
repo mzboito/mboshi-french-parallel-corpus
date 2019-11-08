@@ -1,0 +1,1 @@
+alguien murió ahorcado

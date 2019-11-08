@@ -1,0 +1,1 @@
+la enfermedad está empeorando
