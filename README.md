@@ -1,7 +1,7 @@
 # MMboshi: Multilingual Mboshi Parallel Corpus
 This is an extension of the Mboshi-French parallel corpus available at [besacier/mboshi-french-parallel-corpus](https://github.com/besacier/mboshi-french-parallel-corpus). The French portion of the corpus was translated into four other well-resourced languages (English, German, Portuguese, Spanish) using the [DeepL translation platform](https://www.deepl.com/translator).
 
-### Content
+### Content:
 * This corpus is made of 5,130 aligned sentences in the following languages:
    + Mboshi (Bantu C25); audio files, phonetic transcriptions with segmentation information;
    + French; text (original translation made by linguists)
@@ -50,8 +50,11 @@ article{DBLP:journals/corr/abs-1710-03501,
 Use this following bibtex for citing the mmboshi corpus:
 ~~~
 @article{boito2019does,
-  title={How Does Language Influence Documentation Workflow? Unsupervised Word Discovery Using Translations in Multiple Languages},
-  author={Boito, Marcely Zanon and Villavicencio, Aline and Besacier, Laurent},
+  title={How Does Language Influence Documentation Workflow? 
+         Unsupervised Word Discovery Using Translations in Multiple Languages},
+  author={Boito, Marcely Zanon and 
+          Villavicencio, Aline and 
+          Besacier, Laurent},
   journal={LIFT 2019},
   year={2019}
 }
