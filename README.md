@@ -18,7 +18,7 @@ The original paper for this corpus is available [here](http://arxiv.org/abs/1710
 
 Use this following bibtex for citing the mboshi-french-parallel-corpus:
 ~~~
-article{DBLP:journals/corr/abs-1710-03501,
+@article{DBLP:journals/corr/abs-1710-03501,
   author    = {Pierre Godard and
                Gilles Adda and
                Martine Adda{-}Decker and
