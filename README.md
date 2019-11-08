@@ -1,19 +1,24 @@
 # MMboshi: Multilingual Mboshi Parallel Corpus
-This is an extension of the Mboshi-French parallel corpus available at besacier/mboshi-french-parallel-corpus
+This is an extension of the Mboshi-French parallel corpus available at [besacier/mboshi-french-parallel-corpus](https://github.com/besacier/mboshi-french-parallel-corpus). The French portion of the corpus was translated into four other well-resourced languages (English, German, Portuguese, Spanish) using the [DeepL translation platform](https://www.deepl.com/translator).
 
-## The content of this repository is the following:
-* Forced alignment, wav, translation and transcription files (same from the original repository)
-* Pseudo phones (with and without gold silence information) extracted using zrc recipe from beer-asr/asr
-* True phones individual files (extracted form the limsi-align)
+### Content
+* This corpus is made of 5,130 aligned sentences in the following languages:
+   + Mboshi (Bantu C25); audio files, phonetic transcriptions with segmentation information;
+   + French; text (original translation made by linguists)
+   + English; German; Portuguese; Spanish; text (translated from French using DeepL)
 
-## SOON: translations in other languages
+* Forced-alignment (word-level) between Mboshi and French;
+* Pseudo phones (with and without gold silence information), extracted using ZRC recipe from [beer-asr/asr](https://github.com/beer-asr/beer);
+* True phones, from the [limsi-align](https://github.com/besacier/mboshi-french-parallel-corpus/tree/master/forced_alignments_supervised_spkr/limsi-align).
 
-=> New ZRC reference is available [here](https://github.com/mzboito/ZRC_corpora).
+The new ZRC reference is available [here](https://github.com/mzboito/ZRC_corpora).
 
-## Citing:
-Please use the following bibtex reference to cite our corpus and LREC2018 paper, available at http://arxiv.org/abs/1710.03501
+### Citing:
+The original paper for this corpus is available [here](http://arxiv.org/abs/1710.03501), while this extension was presented at [this paper](https://arxiv.org/abs/1910.05154).
 
-@article{DBLP:journals/corr/abs-1710-03501,
+Use this following bibtex for citing the mboshi-french-parallel-corpus:
+~~~
+article{DBLP:journals/corr/abs-1710-03501,
   author    = {Pierre Godard and
                Gilles Adda and
                Martine Adda{-}Decker and
@@ -40,5 +45,14 @@ Please use the following bibtex reference to cite our corpus and LREC2018 paper,
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-03501},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
+~~~
 
- 
+Use this following bibtex for citing the mmboshi corpus:
+~~~
+@article{boito2019does,
+  title={How Does Language Influence Documentation Workflow? Unsupervised Word Discovery Using Translations in Multiple Languages},
+  author={Boito, Marcely Zanon and Villavicencio, Aline and Besacier, Laurent},
+  journal={LIFT 2019},
+  year={2019}
+}
+~~~
